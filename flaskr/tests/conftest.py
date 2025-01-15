@@ -1,9 +1,9 @@
 from datetime import datetime
 
 import pytest
-from module_29_testing.hw.flaskr.app import create_app
-from module_29_testing.hw.models import Client, Parking, Client_Parking
-from module_29_testing.hw.models import db as _db
+from flaskr.app import create_app
+from models import Client, Parking, Client_Parking
+from models import db as _db
 
 
 
