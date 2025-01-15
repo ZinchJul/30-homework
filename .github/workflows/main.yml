@@ -10,8 +10,8 @@ jobs:
   runs-on: ubuntu-latest
   steps:
     run: pip install requirements.txt
-    run: black --check --diff app.py
-    run: isort --check --diff --profile black app.py
-    run: flake8 app.py
-    run: mypy app.py
+    run: black --check --diff *.py
+    run: isort --check --diff --profile black *.py
+    run: flake8 *.py
+    run: mypy *.py
     
