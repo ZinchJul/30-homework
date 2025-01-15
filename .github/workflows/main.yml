@@ -10,7 +10,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - run: pip install requirements.txt
+      - run: pip install -r requirements.txt
       - run: black --check --diff *.py
       - run: isort --check --diff --profile black *.py
       - run: flake8 *.py
