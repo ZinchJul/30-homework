@@ -3,7 +3,6 @@ from datetime import datetime
 from models import db, Client, Client_Parking, Parking
 
 
-
 def register_routes(app):
     @app.route('/clients', methods=['GET'])
     def get_all_clients():
