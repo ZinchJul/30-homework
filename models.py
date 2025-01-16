@@ -23,8 +23,8 @@ class Client(db.Model):
 
     def __repr__(self):
         return (
-            f"Client {self.name} {self.surname}, credit card - {self.credit_card}, "
-            f"car number {self.car_number}"
+            f"Client {self.name} {self.surname}, credit card - "
+            f"{self.credit_card}, car number {self.car_number}"
         )
 
     def to_json(self) -> Dict[str, Any]:
@@ -54,21 +54,25 @@ class Client_Parking(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     client_id: Mapped[int] = mapped_column(ForeignKey("client.id"))
     parking_id: Mapped[int] = mapped_column(ForeignKey("parking.id"))
-    time_in: Mapped[datetime] = mapped_column(server_default=func.now(), nullable=True)
-    time_out: Mapped[datetime] = mapped_column(server_default=func.now(), nullable=True)
+    time_in: Mapped[datetime] = mapped_column(server_default=func.now(),
+                                              nullable=True)
+    time_out: Mapped[datetime] = mapped_column(server_default=func.now(),
+                                               nullable=True)
 
-    UniqueConstraint("client_id", "parking_id", name="unique_client_parking")
+    UniqueConstraint("client_id", "parking_id",
+                     name="unique_client_parking")
     client = db.relationship("Client", backref="client_parking")
     parking = db.relationship("Parking", backref="client_parking")
 
     def __repr__(self):
         return (
-            f"Client {self.client_id} in parking {self.parking_id} from {self.time_in} "
-            f"until {self.time_out}"
+            f"Client {self.client_id} in parking {self.parking_id} "
+            f"from {self.time_in} until {self.time_out}"
         )
 
     def to_json(self) -> Dict[str, Any]:
-        json_data = {c.name: getattr(self, c.name) for c in self.__table__.columns}
+        json_data = {c.name: getattr(self, c.name) for c in
+                     self.__table__.columns}
         json_data["parking"] = self.parking.to_json()
         json_data["client"] = self.client.to_json()
         return json_data
