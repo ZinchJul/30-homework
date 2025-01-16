@@ -78,7 +78,8 @@ def register_routes(app):
             else:
                 return (
                     jsonify(
-                        {"error": "no available places " "or client has no credit card"}
+                        {"error": "no available places or client has "
+                                  "no credit card"}
                     ),
                     400,
                 )
@@ -91,7 +92,8 @@ def register_routes(app):
         data = request.get_json()
         client_parking = (
             db.session.query(Client_Parking)
-            .filter_by(client_id=data["client_id"], parking_id=data["parking_id"])
+            .filter_by(client_id=data["client_id"],
+                       parking_id=data["parking_id"])
             .first()
         )
         if client_parking is None:
