@@ -10,9 +10,32 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - run: pip install -r requirements.txt
-      - run: black --check --diff *.py
-      - run: isort --check --diff --profile black *.py
-      - run: flake8 *.py
-      - run: mypy *.py
+      # Шаг 1: Клонирование репозитория
+      - uses: actions/checkout@v3
+
+      # Шаг 2: Настройка Python 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11' 
+          
+      # Шаг 3: Установка зависимостей
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Шаг 4: Проверка кода с помощью Black
+      - name: Check code formatting with Black
+        run: black --check --diff *.py
+
+      # Шаг 5: Проверка импорта с помощью isort
+      - name: Check imports with isort
+        run: isort --check --diff --profile black *.py
+
+      # Шаг 6: Статический анализ с flake8
+      - name: Lint with flake8
+        run: flake8 *.py
+
+      # Шаг 7: Проверка типов с mypy
+      - name: Type check with mypy
+        run: mypy *.py
     
