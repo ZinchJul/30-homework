@@ -2,8 +2,15 @@ from datetime import datetime
 from typing import Any, Dict
 
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import (DateTime, ForeignKey, Integer, String,
-                        UniqueConstraint, create_engine, func)
+from sqlalchemy import (
+    DateTime,
+    ForeignKey,
+    Integer,
+    String,
+    UniqueConstraint,
+    create_engine,
+    func,
+)
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, sessionmaker
 
 
